@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 04</title>
+</head>
+<body>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <div class="mermaid">
+        sequenceDiagram
+            participant browser
+            participant server
+
+            browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+            activate server
+            server-->>browser: HTML document
+            deactivate server
+
+            Note right of browser: User submits note by clicking button
+
+            browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+            activate server
+            server-->>browser: URL redirect (302)
+            deactivate server
+
+            browser->>browser: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+
+            browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+            activate server
+            server-->>browser: the css file
+            deactivate server
+
+            browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+            activate server
+            server-->>browser: the JS file
+            deactivate server
+
+            browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+            activate server 
+            server-->>browser: Data of the notes
+
+            Note right of browser: The browser executes the callback function that renders created notes
+    </div>
+</body>
+</html>
